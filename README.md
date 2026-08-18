@@ -39,3 +39,8 @@ The code doesn't add a "0" in front of single-digit seconds. So instead of showi
 - Inside the interval callback, added a check if (timeLeft <= 0) at the very start.
 - When that condition is true, it calls clearInterval(timerId) to stop the interval from firing again, then returns immediately without decrementing further.
 - This means once the timer reaches 0, it stops there instead of continuing into negative numbers.
+
+### Missing leading zero below 10 seconds:
+- Introduced secondsText which checks if seconds < 10, and if so, builds the string "0" + seconds instead of using the raw number.
+- Otherwise it just uses seconds as-is (for values 10–59, no padding is needed).
+- The display line now uses secondsText instead of seconds directly, so the timer always shows two digits for the seconds part (e.g. 9:09 instead of 9:9).

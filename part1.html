@@ -15,7 +15,8 @@ return;
 timeLeft--;
 let minutes = Math.floor(timeLeft / 60);
 let seconds = timeLeft % 60;
-document.getElementById('timer').innerText = minutes + ":" + seconds;
+let secondsText = seconds < 10 ? "0" + seconds : seconds;
+document.getElementById('timer').innerText = minutes + ":" + secondsText;
 }, 1000);
 }
 document.getElementById('startBtn').addEventListener('click', startTimer);
