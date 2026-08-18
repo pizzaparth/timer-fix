@@ -1,3 +1,11 @@
+# Candidate details:
+
+| Registration Number | Name | GitHub | LinkedIn |
+| --- | --- | --- | --- |
+| 25BCE10443 | Parth Pancholi | https://github.com/pizzaparth | https://www.linkedin.com/in/parth-pancholi-a27966381/ |
+
+---
+
 # Fixing the bugs:
 ## Problems I noticed in the Original code.
 - Timer speeds up on clicking "Start"
