@@ -2,40 +2,40 @@
 <button id="startBtn">Start</button>
 <button id="pauseBtn">Pause</button>
 <script>
-let timeLeft = 600; // 10 minutes in seconds
-let timerId = null;
-let endTime = null;
-function updateDisplay() {
-let minutes = Math.floor(timeLeft / 60);
-let seconds = timeLeft % 60;
-let secondsText = seconds < 10 ? "0" + seconds : seconds;
-document.getElementById('timer').innerText = minutes + ":" + secondsText;
-}
-function tick() {
-timeLeft = Math.max(0, Math.round((endTime - Date.now()) / 1000));
-updateDisplay();
-if (timeLeft <= 0) {
-clearInterval(timerId);
-timerId = null;
-}
-}
-function startTimer() {
-if (timerId !== null) {
-return;
-}
-endTime = Date.now() + timeLeft * 1000;
-timerId = setInterval(tick, 1000);
-}
-function togglePause() {
-if (timerId !== null) {
-clearInterval(timerId);
-timerId = null;
-document.getElementById('pauseBtn').innerText = "Resume";
-} else {
-startTimer();
-document.getElementById('pauseBtn').innerText = "Pause";
-}
-}
-document.getElementById('startBtn').addEventListener('click', startTimer);
-document.getElementById('pauseBtn').addEventListener('click', togglePause);
+    let timeLeft = 600; // 10 minutes in seconds
+    let timerId = null;
+    let endTime = null;
+    function updateDisplay() {
+        let minutes = Math.floor(timeLeft / 60);
+        let seconds = timeLeft % 60;
+        let secondsText = seconds < 10 ? "0" + seconds : seconds;
+        document.getElementById('timer').innerText = minutes + ":" + secondsText;
+    }
+    function tick() {
+        timeLeft = Math.max(0, Math.round((endTime - Date.now()) / 1000));
+        updateDisplay();
+        if (timeLeft <= 0) {
+            clearInterval(timerId);
+            timerId = null;
+        }
+    }
+    function startTimer() {
+        if (timerId !== null) {
+            return;
+        }
+        endTime = Date.now() + timeLeft * 1000;
+        timerId = setInterval(tick, 1000);
+    }
+    function togglePause() {
+        if (timerId !== null) {
+            clearInterval(timerId);
+            timerId = null;
+            document.getElementById('pauseBtn').innerText = "Resume";
+        } else {
+            startTimer();
+            document.getElementById('pauseBtn').innerText = "Pause";
+        }
+    }
+    document.getElementById('startBtn').addEventListener('click', startTimer);
+    document.getElementById('pauseBtn').addEventListener('click', togglePause);
 </script>

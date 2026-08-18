@@ -1,23 +1,23 @@
 <div id="timer">10:00</div>
 <button id="startBtn">Start</button>
 <script>
-let timeLeft = 600; // 10 minutes in seconds
-let timerId = null;
-function startTimer() {
-if (timerId !== null) {
-return;
-}
-timerId = setInterval(() => {
-if (timeLeft <= 0) {
-clearInterval(timerId);
-return;
-}
-timeLeft--;
-let minutes = Math.floor(timeLeft / 60);
-let seconds = timeLeft % 60;
-let secondsText = seconds < 10 ? "0" + seconds : seconds;
-document.getElementById('timer').innerText = minutes + ":" + secondsText;
-}, 1000);
-}
-document.getElementById('startBtn').addEventListener('click', startTimer);
+    let timeLeft = 600; // 10 minutes in seconds
+    let timerId = null;
+    function startTimer() {
+        if (timerId !== null) {
+            return;
+        }
+        timerId = setInterval(() => {
+            if (timeLeft <= 0) {
+                clearInterval(timerId);
+                return;
+            }
+            timeLeft--;
+            let minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            let secondsText = seconds < 10 ? "0" + seconds : seconds;
+            document.getElementById('timer').innerText = minutes + ":" + secondsText;
+        }, 1000);
+    }
+    document.getElementById('startBtn').addEventListener('click', startTimer);
 </script>
