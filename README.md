@@ -9,7 +9,7 @@ The code never checks if the time has reached 0. It just keeps subtracting 1 eve
 - Below 10 seconds
 The code doesn't add a "0" in front of single-digit seconds. So instead of showing 9:09, 9:08, etc., it shows 9:9, 9:8, the leading zero is just missing, making it look a bit off. And once the timer goes negative and it shows weird stuff like -1:-1.
 
-## Causes for the bugs:
+## Causes for the bugs accorind to me:
 ### 1. Timer speeds up on clicking "Start"
 
 - startTimer() calls setInterval(...) every time it runs, but never saves the interval ID it gets back.
@@ -28,3 +28,9 @@ The code doesn't add a "0" in front of single-digit seconds. So instead of showi
 - seconds is calculated with timeLeft % 60, which gives a plain number (e.g. 9, not "09").
 - That number is placed directly into the text (minutes + ":" + seconds) with no formatting step to pad single digits with a leading zero.
 - Combined with bug #2, once timeLeft goes negative, JavaScript's % and Math.floor behave oddly with negative numbers, making the missing-zero problem look even stranger (e.g. -1:-1).
+
+## Fixing the bugs:
+### The timer speeds up on clicking "start":
+- Added a timerId variable to keep track of whether an interval is currently running.
+- Before starting a new interval, startTimer() now checks if timerId is already set — if it is, the function just returns and does nothing.
+- This means clicking "Start" multiple times no longer creates multiple overlapping intervals, so timeLeft only ever gets decremented once per second, no matter how many times the button is clicked.
