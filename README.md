@@ -44,3 +44,13 @@ The code doesn't add a "0" in front of single-digit seconds. So instead of showi
 - Introduced secondsText which checks if seconds < 10, and if so, builds the string "0" + seconds instead of using the raw number.
 - Otherwise it just uses seconds as-is (for values 10–59, no padding is needed).
 - The display line now uses secondsText instead of seconds directly, so the timer always shows two digits for the seconds part (e.g. 9:09 instead of 9:9).
+
+---
+
+# Adding features:
+
+## Adding a pause/resume button (approach):
+- Used the existing timerId variable to know if the timer is running or not.
+- If the timer is running and Pause is clicked: stop it with clearInterval, and change the button text to "Resume".
+- If it's not running and the button (now "Resume") is clicked: just call the same startTimer() function again to continue counting down, and change the text back to "Pause".
+
