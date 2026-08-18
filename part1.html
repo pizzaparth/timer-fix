@@ -8,6 +8,10 @@ if (timerId !== null) {
 return;
 }
 timerId = setInterval(() => {
+if (timeLeft <= 0) {
+clearInterval(timerId);
+return;
+}
 timeLeft--;
 let minutes = Math.floor(timeLeft / 60);
 let seconds = timeLeft % 60;

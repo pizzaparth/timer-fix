@@ -34,3 +34,8 @@ The code doesn't add a "0" in front of single-digit seconds. So instead of showi
 - Added a timerId variable to keep track of whether an interval is currently running.
 - Before starting a new interval, startTimer() now checks if timerId is already set — if it is, the function just returns and does nothing.
 - This means clicking "Start" multiple times no longer creates multiple overlapping intervals, so timeLeft only ever gets decremented once per second, no matter how many times the button is clicked.
+
+### Timer goes negative:
+- Inside the interval callback, added a check if (timeLeft <= 0) at the very start.
+- When that condition is true, it calls clearInterval(timerId) to stop the interval from firing again, then returns immediately without decrementing further.
+- This means once the timer reaches 0, it stops there instead of continuing into negative numbers.
