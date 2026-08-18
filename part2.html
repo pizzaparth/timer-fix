@@ -4,22 +4,27 @@
 <script>
 let timeLeft = 600; // 10 minutes in seconds
 let timerId = null;
-function startTimer() {
-if (timerId !== null) {
-return;
-}
-timerId = setInterval(() => {
-if (timeLeft <= 0) {
-clearInterval(timerId);
-timerId = null;
-return;
-}
-timeLeft--;
+let endTime = null;
+function updateDisplay() {
 let minutes = Math.floor(timeLeft / 60);
 let seconds = timeLeft % 60;
 let secondsText = seconds < 10 ? "0" + seconds : seconds;
 document.getElementById('timer').innerText = minutes + ":" + secondsText;
-}, 1000);
+}
+function tick() {
+timeLeft = Math.max(0, Math.round((endTime - Date.now()) / 1000));
+updateDisplay();
+if (timeLeft <= 0) {
+clearInterval(timerId);
+timerId = null;
+}
+}
+function startTimer() {
+if (timerId !== null) {
+return;
+}
+endTime = Date.now() + timeLeft * 1000;
+timerId = setInterval(tick, 1000);
 }
 function togglePause() {
 if (timerId !== null) {

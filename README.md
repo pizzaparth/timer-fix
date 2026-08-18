@@ -54,3 +54,7 @@ The code doesn't add a "0" in front of single-digit seconds. So instead of showi
 - If the timer is running and Pause is clicked: stop it with clearInterval, and change the button text to "Resume".
 - If it's not running and the button (now "Resume") is clicked: just call the same startTimer() function again to continue counting down, and change the text back to "Pause".
 
+## Countdown accuracy and drift proofing (approach):
+- Before, the timer just subtracted 1 every time setInterval fired, but if the laptop sleeps or the tab is backgrounded, those ticks get delayed or skipped, so counting ticks loses time.
+- Instead of counting ticks, the timer now remembers the actual clock time it should finish at (endTime), calculated once when Start is pressed.
+- On every tick, instead of just subtracting 1, it recalculates the remaining time as the difference between endTime and the current real time (Date.now()).
